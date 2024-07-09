@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Spam Classifier</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1 class="text-center my-4">Email Spam Classifier</h1>
+    <form method="post" action="/">
+        <div class="form-group">
+            <label for="message">Enter your email message:</label>
+            <textarea class="form-control" id="message" name="message" rows="5" required>{{ request.form.get('message', '') }}</textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Classify</button>
+    </form>
+    {% if message %}
+    <div class="mt-4">
+        <h3>Original Message:</h3>
+        <p>{{ message }}</p>
+        <h3>Naive Bayes Classification:</h3>
+        <p>{{ nb_result }}</p>
+        <h3>SVM Classification:</h3>
+        <p>{{ svm_result }}</p>
+    </div>
+    {% endif %}
+</div>
+</body>
+</html>
